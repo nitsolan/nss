@@ -1,4 +1,5 @@
 <?php 
+define('ROOT_PATH', dirname(__DIR__) . '/');
 header('X-UA-Compatible: IE=edge'); 
 ob_start("ob_gzhandler");
 error_reporting(0);
