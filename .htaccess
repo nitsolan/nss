@@ -1,0 +1,26 @@
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^ourwaparks\.com\.au$ [NC]
+RewriteRule ^(.*)$ http://www.ourwaparks.com.au/$1 [R=301,L]
+
+DirectoryIndex index.php index.html
+
+ErrorDocument 404 /404.html
+
+<ifModule mod_headers.c>
+ExpiresActive On
+
+# Expires after 1 month
+<filesMatch ".(gif|png|jpg|jpeg|ico|pdf|css|js|htm|html|txt)$">
+Header set Cache-Control "max-age=2592000"
+</filesMatch>
+
+</ifModule>
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css application/x-javascript application/javascript
+</IfModule>
+
+
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?ourwaparks.com.au [NC]
+RewriteRule \.(jpg|jpeg|png|gif)$ assets/img/hotlink.jpg [NC,R,L]
